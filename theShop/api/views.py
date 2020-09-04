@@ -7,7 +7,7 @@ from .models import ShopItem
 
 
 class ShopItemViewSet(viewsets.ModelViewSet):
-    queryset = ShopItem.objects.all().order_by('name')
+    queryset = ShopItem.objects.all().order_by('id')
     serializer_class = ShopItemSerializer
 
 # Create your views here.
