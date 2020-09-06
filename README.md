@@ -4,8 +4,8 @@
       <img
         src="./undCon.gif"
         alt="under construction"
-        width="75%"
-        height="75%"
+        width="25%"
+        height="25%"
       />
   </div>
 
@@ -15,13 +15,13 @@ This is a an example of using ReactJs as frontend and Django Python for backend 
 
 # REST API endpoints
 
-| HTTP Method | path               | input                    | output                                      |
-| ----------- | ------------------ | ------------------------ | ------------------------------------------- |
-| GET         | /api/shopItems/    | null                     | JSON List of all items                      |
-| POST        | /api/shopItems/    | name,desc,price,quantity | Adds new shopItem                           |
-| GET         | /api/shopItems/:id | null                     | JSON object of shopItem with id provided    |
-| PUT         | /api/shopItems/:id | name,desc,price,quantity | updates object of shopItem with id provided |
-| DELETE      | /api/shopItems/:id | null                     | DELETE object of shopItem with id provided  |
+| HTTP Method | path               | input                                           | output                                      |
+| ----------- | ------------------ | ----------------------------------------------- | ------------------------------------------- |
+| GET         | /api/shopItems/    | null                                            | JSON List of all items                      |
+| POST        | /api/shopItems/    | name(int),desc(String),price(dec),quantity(int) | Adds new shopItem                           |
+| GET         | /api/shopItems/:id | null                                            | JSON object of shopItem with id provided    |
+| PUT         | /api/shopItems/:id | name(int),desc(String),price(dec),quantity(int) | updates object of shopItem with id provided |
+| DELETE      | /api/shopItems/:id | null                                            | DELETE object of shopItem with id provided  |
 
 # Technologies used in this repo
 
@@ -32,3 +32,4 @@ This is a an example of using ReactJs as frontend and Django Python for backend 
 - [react-router](https://reactrouter.com/) - For declarative routing inside a react application
 - [Font awsome](https://fontawesome.com/) - CDN for Online icons and fonts
 - [Django Rest Framework](https://www.django-rest-framework.org/) - Python based Django managed REST frame work for handling Rest web services to backend system
+- [Python](https://www.python.org/) - Python is a programming language that lets you work quickly and integrate systems more effectively
