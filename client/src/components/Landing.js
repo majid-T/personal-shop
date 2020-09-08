@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
+import AddItemPanel from "./AddItemPanel";
 
 function Landing() {
   const url = "http://localhost:8000/api/shopItems/";
@@ -22,9 +23,11 @@ function Landing() {
     console.log("items", items);
   }, [loading]);
   return (
-    <Container>
+    <Container fluid={true} className="my-3">
       <Row>
-        <Col sm={4}>Panel</Col>
+        <Col sm={4}>
+          <AddItemPanel />
+        </Col>
         <Col sm={8}>{loading ? <Spinner /> : <div>items</div>}</Col>
       </Row>
     </Container>
