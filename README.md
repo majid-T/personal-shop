@@ -9,6 +9,12 @@
       />
   </div>
 
+## Todo 
+- Add items component in front end
+- Add single Item page on front end
+- Add delete functionality on items and item page
+- Add edit functionality on item page
+
 # What is this repo
 
 This is a an example of using ReactJs as frontend and Django Python for backend and make them communicate and send/receive data by REST calls.
@@ -18,9 +24,9 @@ This is a an example of using ReactJs as frontend and Django Python for backend 
 | HTTP Method | path               | input                                           | output                                      |
 | ----------- | ------------------ | ----------------------------------------------- | ------------------------------------------- |
 | GET         | /api/shopItems/    | null                                            | JSON List of all items                      |
-| POST        | /api/shopItems/    | name(int),desc(String),price(dec),quantity(int) | Adds new shopItem                           |
+| POST        | /api/shopItems/    | name(string),desc(String),price(dec),quantity(int) | Adds new shopItem                           |
 | GET         | /api/shopItems/:id | null                                            | JSON object of shopItem with id provided    |
-| PUT         | /api/shopItems/:id | name(int),desc(String),price(dec),quantity(int) | updates object of shopItem with id provided |
+| PUT         | /api/shopItems/:id | name(string),desc(String),price(dec),quantity(int) | updates object of shopItem with id provided |
 | DELETE      | /api/shopItems/:id | null                                            | DELETE object of shopItem with id provided  |
 
 # Technologies used in this repo
