@@ -1,8 +1,17 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table'
 
-function ItemsTable(items) {
+function ItemsTable({ items }) {
     console.log("PROPS", items)
+    const rows = items.map((item) => {
+        return (<tr key={item.id}>
+            <td>{item.id}</td>
+            <td>{item.name}</td>
+            <td>{item.desc}</td>
+            <td>{item.price}</td>
+            <td>{item.quantity}</td>
+        </tr>)
+    });
     return (
         <Table striped bordered hover size="sm">
             <thead>
@@ -15,29 +24,7 @@ function ItemsTable(items) {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@mdo</td>
-
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                    <td>@mdo</td>
-
-                </tr>
+                {rows}
             </tbody>
         </Table>
     )
