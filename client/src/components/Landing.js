@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
 import AddItemPanel from "./AddItemPanel";
+import ItemsTable from './ItemsTable';
 
 function Landing() {
   const url = "http://localhost:8000/api/shopItems/";
@@ -28,7 +29,7 @@ function Landing() {
         <Col sm={4}>
           <AddItemPanel />
         </Col>
-        <Col sm={8}>{loading ? <Spinner /> : <div>items</div>}</Col>
+        <Col sm={8}>{loading ? <Spinner /> : <ItemsTable items={items} />}</Col>
       </Row>
     </Container>
   );
