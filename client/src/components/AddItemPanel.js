@@ -7,10 +7,11 @@ import Spinner from "react-bootstrap/Spinner";
 import axios from "axios";
 
 
-function AddItemPanel() {
-  const [prompt, setPrompt] = useState(true);//temporary set to true for demo
-  const [propmtMsg, setPropmtMsg] = useState("Test Msg");//temporary test msg for demo
-  const [promptClass, setPromptClass] = useState("success"); //temporary succes class for demo
+function AddItemPanel({ refreshItems }) {
+  const [errors, setErrors] = useState([]);
+  const [prompt, setPrompt] = useState(false);
+  const [propmtMsg, setPropmtMsg] = useState("");
+  const [promptClass, setPromptClass] = useState("");
   const [btnMsg, setBtnMsg] = useState("add");
   const [loading, setLoading] = useState(false);
   //form values
@@ -43,14 +44,18 @@ function AddItemPanel() {
     };
     try {
       setLoading(true);
-      const res = await axios.put(
+
+      const res = await axios.post(
         `http://localhost:8000/api/shopItems/`,
         body,
         config
       );
 
-      if (res.status == 200) {
-        setPrompt(`Sea time service added for ${res.data.name}`);
+      if (res.status == 201) {
+        setPrompt(true);
+        setErrors([])
+        setPropmtMsg(`New Item Added`);
+        setPromptClass('success');
         setFormData({
           itemName: "",
           itemDesc: "",
@@ -58,10 +63,21 @@ function AddItemPanel() {
           itemPrice: "",
         });
         setLoading(false);
+        refreshItems();
+      } else {
+        setPrompt(true);
+        setPropmtMsg(`Something went wrong ... couldn't add Item`);
+        setPromptClass('danger');
+        console.log(res);
+        setLoading(false);
       }
     } catch (err) {
-      console.log(err);
-      setPrompt(`Something went wrong ... couldn't add Item`);
+      console.log("CATCH", err);
+      const responsErrors = []
+      for (const [key, value] of Object.entries(err.response.data)) {
+        responsErrors.push(`${key}:${value}`)
+      }
+      setErrors(responsErrors)
       setLoading(false);
     }
   };
@@ -72,15 +88,15 @@ function AddItemPanel() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    //addShopItem();
+    addShopItem();
   };
 
 
   useEffect(() => { });
   return (
     <div className="addItemPanel">
-      {prompt ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
+      {prompt > 0 ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
+      {errors.length > 0 ? (errors.map(e => <Alert variant='danger'>{e}</Alert>)) : <></>}
 
       <Form onSubmit={(e) => onSubmit(e)}>
         <Form.Group controlId="itemName">

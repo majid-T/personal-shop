@@ -2,7 +2,6 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 
 function ItemsTable({ items }) {
-    console.log("PROPS", items)
     const rows = items.map((item) => {
         return (<tr key={item.id}>
             <td>{item.id}</td>

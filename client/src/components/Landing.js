@@ -6,14 +6,13 @@ import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
 import AddItemPanel from "./AddItemPanel";
 import ItemsTable from './ItemsTable';
-
+// refreshItems = {() => getItems()}
 function Landing() {
   const url = "http://localhost:8000/api/shopItems/";
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const getItems = async () => {
-    console.log("called...");
     let result = await axios.get(url);
     let apiItems = result.data;
     setItems(apiItems);
@@ -21,15 +20,14 @@ function Landing() {
   };
   useEffect(() => {
     getItems();
-    console.log("items", items);
   }, [loading]);
   return (
     <Container fluid={true} className="my-3">
       <Row>
-        <Col sm={4}>
-          <AddItemPanel />
+        <Col sm={3}>
+          <AddItemPanel refreshItems={() => getItems()} />
         </Col>
-        <Col sm={8}>{loading ? <Spinner /> : <ItemsTable items={items} />}</Col>
+        <Col sm={9}>{loading ? <Spinner /> : <ItemsTable items={items} />}</Col>
       </Row>
     </Container>
   );
