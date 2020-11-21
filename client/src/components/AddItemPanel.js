@@ -74,11 +74,17 @@ function AddItemPanel({ refreshItems }) {
     } catch (err) {
       console.log("CATCH", err);
       const responseErrors = []
-      for (const [key, value] of Object.entries(err.response.data)) {
-        responseErrors.push(`${key}:${value}`)
+      if (err.response.data) {
+        for (const [key, value] of Object.entries(err.response.data)) {
+          responseErrors.push(`${key}: ${value}`)
+        }
+        setErrors(responseErrors)
+      } else {
+        setErrors([`There was an error ${err}`])
       }
-      setErrors(responseErrors)
       setLoading(false);
+
+      setTimeout(() => setErrors([]), 5000);
     }
   };
 

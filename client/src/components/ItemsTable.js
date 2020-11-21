@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -9,7 +9,6 @@ import Alert from "react-bootstrap/Alert";
 
 function ItemsTable({ items, refreshItems }) {
     const [prompt, setPrompt] = useState(false);
-    const [errors, setErrors] = useState([]);
     const [propmtMsg, setPropmtMsg] = useState("");
     const [promptClass, setPromptClass] = useState("");
     const [show, setShow] = useState(false);
@@ -23,8 +22,12 @@ function ItemsTable({ items, refreshItems }) {
     const deleteItem = async () => {
         const config = {
             headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+                "Access-Control-Allow-Origin": "http://localhost:3000/",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Headers": "accept, accept-encoding, authorization, content-type, dnt, origin, user-agent, x-csrftoken, x-requested-with",
+                "Access-Control-Allow-Headers": "access-control-allow-credentials, access-control-allow-headers, access-control-allow-methods, access-control-allow-origin, access-control-max-age",
+                "Access-Control-Max-Age": "86400"
             },
         };
 
@@ -39,19 +42,17 @@ function ItemsTable({ items, refreshItems }) {
             console.log(res)
             if (res.status == 204) {
                 setPrompt(true);
-                setErrors([])
                 setPropmtMsg(`Item Deleted.`);
                 setPromptClass('success');
-                // setLoading(false);
                 refreshItems();
+                setTimeout(() => setPrompt(false), 5000);
             }
         } catch (err) {
             console.log("CATCH", err);
-            const responseErrors = []
-            for (const [key, value] of Object.entries(err.response.data)) {
-                responseErrors.push(`${key}:${value}`)
-            }
-            setErrors(responseErrors)
+            setPrompt(true);
+            setPropmtMsg(`there was a problem ${err}`);
+            setPromptClass('danger');
+            setTimeout(() => setPrompt(false), 5000);
         }
 
         setShow(false);
@@ -65,7 +66,7 @@ function ItemsTable({ items, refreshItems }) {
             <td>{item.price}</td>
             <td>{item.quantity}</td>
             <td className='deleteItem' onClick={() => promptDelete(item)}>x</td>
-            <td>Edit</td>
+            <td>...</td>
         </tr>)
     });
 
@@ -73,8 +74,6 @@ function ItemsTable({ items, refreshItems }) {
     return (
         <>
             {prompt ? <Alert variant={promptClass} onClose={() => setPrompt(false)} dismissible>{propmtMsg}</Alert> : <></>}
-            {errors.length > 0 ? (errors.map(e => <Alert variant='danger' dismissible>{e}</Alert>)) : <></>}
-
             <Modal
                 show={show}
                 onHide={handleClose}
