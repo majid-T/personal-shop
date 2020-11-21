@@ -14,6 +14,8 @@
 - Add delete in item page
 - Add edit functionality on item page
 - Add page not Found component
+- Add trycatch to all axios calls
+- Table of Items is not responsive and scrollable
 
 # What is this repo
 
