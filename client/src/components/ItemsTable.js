@@ -3,10 +3,11 @@ import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
+import Alert from "react-bootstrap/Alert";
 
 
 
-function ItemsTable({ items }) {
+function ItemsTable({ items, refreshItems }) {
     const [prompt, setPrompt] = useState(false);
     const [errors, setErrors] = useState([]);
     const [propmtMsg, setPropmtMsg] = useState("");
@@ -37,7 +38,12 @@ function ItemsTable({ items }) {
 
             console.log(res)
             if (res.status == 204) {
-                console.log("Succesfully delete and Item")
+                setPrompt(true);
+                setErrors([])
+                setPropmtMsg(`Item Deleted.`);
+                setPromptClass('success');
+                // setLoading(false);
+                refreshItems();
             }
         } catch (err) {
             console.log("CATCH", err);
@@ -47,7 +53,6 @@ function ItemsTable({ items }) {
             }
             setErrors(responseErrors)
         }
-
 
         setShow(false);
     }
@@ -67,7 +72,9 @@ function ItemsTable({ items }) {
 
     return (
         <>
-            {prompt ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
+            {prompt ? <Alert variant={promptClass} onClose={() => setPrompt(false)} dismissible>{propmtMsg}</Alert> : <></>}
+            {errors.length > 0 ? (errors.map(e => <Alert variant='danger' dismissible>{e}</Alert>)) : <></>}
+
             <Modal
                 show={show}
                 onHide={handleClose}

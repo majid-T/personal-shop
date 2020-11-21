@@ -27,7 +27,7 @@ function Landing() {
         <Col sm={3}>
           <AddItemPanel refreshItems={() => getItems()} />
         </Col>
-        <Col sm={9}>{loading ? <Spinner /> : <ItemsTable items={items} />}</Col>
+        <Col sm={9}>{loading ? <Spinner /> : <ItemsTable items={items} refreshItems={() => getItems()} />}</Col>
       </Row>
     </Container>
   );
