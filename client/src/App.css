@@ -3,3 +3,9 @@
   padding: 3px;
   height: 100vh;
 }
+
+.deleteItem{
+  color: firebrick;
+  text-align: center;
+  cursor: pointer;
+}
