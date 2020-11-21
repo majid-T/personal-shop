@@ -6,6 +6,13 @@
 
 .deleteItem{
   color: firebrick;
-  text-align: center;
   cursor: pointer;
+}
+
+.centerd-text{
+  text-align: center;
+}
+
+thead{
+    text-align: center;
 }

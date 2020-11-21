@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import Alert from "react-bootstrap/Alert";
-
+import { Link } from "react-router-dom";
 
 
 function ItemsTable({ items, refreshItems }) {
@@ -65,9 +65,13 @@ function ItemsTable({ items, refreshItems }) {
             <td>{item.desc}</td>
             <td>{item.price}</td>
             <td>{item.quantity}</td>
-            <td className='deleteItem' onClick={() => promptDelete(item)}>x</td>
-            <td>...</td>
-        </tr>)
+            <td className='deleteItem centerd-text' onClick={() => promptDelete(item)}>x</td>
+            <td className='centerd-text'>
+                <Link to={`/shop-item/${item.id}`}>
+                    <i class="fas fa-edit"></i>
+                </Link>
+            </td>
+        </tr >)
     });
 
 
