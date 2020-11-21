@@ -64,6 +64,8 @@ function AddItemPanel({ refreshItems }) {
         });
         setLoading(false);
         refreshItems();
+        setTimeout(() => setPrompt(false), 5000);
+
       } else {
         setPrompt(true);
         setPropmtMsg(`Something went wrong ... couldn't add Item`);
