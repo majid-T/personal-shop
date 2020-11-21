@@ -10,10 +10,10 @@
   </div>
 
 ## Todo 
-- Add items component in front end
 - Add single Item page on front end
-- Add delete functionality on items and item page
+- Add delete in item page
 - Add edit functionality on item page
+- Add page not Found component
 
 # What is this repo
 
