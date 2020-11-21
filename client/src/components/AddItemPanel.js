@@ -73,11 +73,11 @@ function AddItemPanel({ refreshItems }) {
       }
     } catch (err) {
       console.log("CATCH", err);
-      const responsErrors = []
+      const responseErrors = []
       for (const [key, value] of Object.entries(err.response.data)) {
-        responsErrors.push(`${key}:${value}`)
+        responseErrors.push(`${key}:${value}`)
       }
-      setErrors(responsErrors)
+      setErrors(responseErrors)
       setLoading(false);
     }
   };
@@ -95,7 +95,7 @@ function AddItemPanel({ refreshItems }) {
   useEffect(() => { });
   return (
     <div className="addItemPanel">
-      {prompt > 0 ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
+      {prompt ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
       {errors.length > 0 ? (errors.map(e => <Alert variant='danger'>{e}</Alert>)) : <></>}
 
       <Form onSubmit={(e) => onSubmit(e)}>
