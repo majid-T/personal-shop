@@ -10,7 +10,6 @@ import Spinner from "react-bootstrap/Spinner";
 function ShopItem() {
     let { id } = useParams();
     const url = "http://localhost:8000/api/shopItems/";
-    // const [item, setItem] = useState(null);
     const [errors, setErrors] = useState([]);
     const [prompt, setPrompt] = useState(false);
     const [propmtMsg, setPropmtMsg] = useState("");
@@ -25,6 +24,7 @@ function ShopItem() {
         itemQ: "",
         itemPrice: "",
     });
+
     const {
         itemName,
         itemDesc,
@@ -50,12 +50,12 @@ function ShopItem() {
             setLoading(true);
 
             const res = await axios.put(
-                `http://localhost:8000/api/shopItems/${id}/`,
+                url + `${id}/`,
                 body,
                 config
             );
 
-            if (res.status == 200) {
+            if (res.status === 200) {
                 setPrompt(true);
                 setErrors([])
                 setPropmtMsg(`Item Modified`);
@@ -107,7 +107,6 @@ function ShopItem() {
             itemQ: apiItem.quantity,
             itemPrice: apiItem.price
         })
-        // setItem(apiItem);
         setLoading(false);
     };
     useEffect(() => {
