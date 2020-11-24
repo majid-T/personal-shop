@@ -15,8 +15,8 @@ function ShopItem() {
     const [prompt, setPrompt] = useState(false);
     const [propmtMsg, setPropmtMsg] = useState("");
     const [promptClass, setPromptClass] = useState("");
-    const [btnMsg, setBtnMsg] = useState("add");
     const [loading, setLoading] = useState(false);
+    const [editMode, setEditMode] = useState(false)
 
     //form values
     const [formData, setFormData] = useState({
@@ -32,7 +32,7 @@ function ShopItem() {
         itemPrice,
     } = formData;
 
-    const addShopItem = async () => {
+    const editShopItem = async () => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -49,37 +49,33 @@ function ShopItem() {
         try {
             setLoading(true);
 
-            const res = await axios.post(
-                `http://localhost:8000/api/shopItems/`,
+            const res = await axios.put(
+                `http://localhost:8000/api/shopItems/${id}/`,
                 body,
                 config
             );
 
-            if (res.status == 201) {
+            if (res.status == 200) {
                 setPrompt(true);
                 setErrors([])
-                setPropmtMsg(`New Item Added`);
+                setPropmtMsg(`Item Modified`);
                 setPromptClass('success');
-                setFormData({
-                    itemName: "",
-                    itemDesc: "",
-                    itemQ: "",
-                    itemPrice: "",
-                });
                 setLoading(false);
+                setEditMode(false);
                 setTimeout(() => setPrompt(false), 5000);
 
             } else {
                 setPrompt(true);
-                setPropmtMsg(`Something went wrong ... couldn't add Item`);
+                setPropmtMsg(`Something went wrong ... couldn't edit Item`);
                 setPromptClass('danger');
-                console.log(res);
+                console.log("RESPONSE", res);
                 setLoading(false);
+                setEditMode(false);
             }
         } catch (err) {
             console.log("CATCH", err);
             const responseErrors = []
-            if (err.response.data) {
+            if (err.response && err.response.data) {
                 for (const [key, value] of Object.entries(err.response.data)) {
                     responseErrors.push(`${key}: ${value}`)
                 }
@@ -88,7 +84,7 @@ function ShopItem() {
                 setErrors([`There was an error ${err}`])
             }
             setLoading(false);
-
+            setEditMode(false);
             setTimeout(() => setErrors([]), 5000);
         }
     };
@@ -99,13 +95,12 @@ function ShopItem() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        addShopItem();
+        editShopItem();
     };
 
     const getItem = async () => {
         let result = await axios.get(url + `${id}/`);
         let apiItem = result.data;
-        console.log(apiItem)
         setFormData({
             itemName: apiItem.name,
             itemDesc: apiItem.desc,
@@ -129,7 +124,7 @@ function ShopItem() {
                 <Form onSubmit={(e) => onSubmit(e)}>
                     <Form.Group controlId="itemName">
                         <Form.Label>Item name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter Item name"
+                        <Form.Control type="text" placeholder="Enter Item name" disabled={!editMode}
                             name="itemName"
                             value={itemName}
                             onChange={(e) => onChange(e)} />
@@ -137,24 +132,24 @@ function ShopItem() {
 
                     <Form.Group controlId="itemDesc">
                         <Form.Label>Description to your Item</Form.Label>
-                        <Form.Control type="text" placeholder="What is it?" name="itemDesc"
+                        <Form.Control type="text" placeholder="What is it?" name="itemDesc" disabled={!editMode}
                             value={itemDesc}
                             onChange={(e) => onChange(e)} />
                     </Form.Group>
 
                     <Form.Row>
                         <Col>
-                            <Form.Control type="number" placeholder="Quantity" name="itemQ"
+                            <Form.Control type="number" placeholder="Quantity" name="itemQ" disabled={!editMode}
                                 value={itemQ}
                                 onChange={(e) => onChange(e)} />
                         </Col>
                         <Col>
-                            <Form.Control type="number" step="0.01" placeholder="price" name="itemPrice"
+                            <Form.Control type="number" step="0.01" placeholder="price" name="itemPrice" disabled={!editMode}
                                 value={itemPrice}
                                 onChange={(e) => onChange(e)} />
                         </Col>
                     </Form.Row>
-                    <Button variant="primary" type="submit" className="my-2" >
+                    {editMode && <Button variant="success" type="submit" className="my-2" >
                         {loading && (
                             <Spinner
                                 as="span"
@@ -164,9 +159,22 @@ function ShopItem() {
                                 aria-hidden="true"
                             />
                         )}
-                        {btnMsg}
+                        Save
+                    </Button>}
+                    <Button variant="warning" className="my-2 mx-2" onClick={() => setEditMode(!editMode)} >
+                        {loading && (
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                        )}
+                        {!editMode ? "EDIT" : "Cancel"}
                     </Button>
                 </Form>
+
             )}
         </div>
     )
