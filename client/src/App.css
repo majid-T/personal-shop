@@ -4,6 +4,11 @@
   height: 100vh;
 }
 
+.editItemPanel {
+  background-color: #e3e3e3;
+  border-radius: 10px;
+}
+
 .deleteItem{
   color: firebrick;
   cursor: pointer;

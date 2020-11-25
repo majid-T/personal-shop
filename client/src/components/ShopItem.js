@@ -115,7 +115,7 @@ function ShopItem() {
 
 
     return (
-        <div className="editItemPanel">
+        <div className="editItemPanel m-5 p-5">
             {prompt ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
             {errors.length > 0 ? (errors.map(e => <Alert variant='danger'>{e}</Alert>)) : <></>}
 
