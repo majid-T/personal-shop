@@ -138,6 +138,14 @@ function ShopItem() {
 
                     <Form.Row>
                         <Col>
+                            <Form.Label>Quantity</Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Label>Pirce CAD</Form.Label>
+                        </Col>
+                    </Form.Row>
+                    <Form.Row>
+                        <Col>
                             <Form.Control type="number" placeholder="Quantity" name="itemQ" disabled={!editMode}
                                 value={itemQ}
                                 onChange={(e) => onChange(e)} />

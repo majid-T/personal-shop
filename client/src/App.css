@@ -9,6 +9,11 @@
   border-radius: 10px;
 }
 
+.editItemPanel label{
+  border-bottom: 1px solid #000;
+  font-weight: 900;
+
+}
 .deleteItem{
   color: firebrick;
   cursor: pointer;
