@@ -101,7 +101,7 @@ function ItemsTable({ items, refreshItems }) {
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>#id</th>
                         <th>Item Name</th>
                         <th>Description</th>
                         <th>Price</th>

@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
+import Modal from 'react-bootstrap/Modal';
+
 
 function ShopItem() {
     let { id } = useParams();
@@ -15,7 +17,8 @@ function ShopItem() {
     const [propmtMsg, setPropmtMsg] = useState("");
     const [promptClass, setPromptClass] = useState("");
     const [loading, setLoading] = useState(false);
-    const [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false);
+    const [show, setShow] = useState(false)
 
     //form values
     const [formData, setFormData] = useState({
@@ -31,6 +34,8 @@ function ShopItem() {
         itemQ,
         itemPrice,
     } = formData;
+
+    const handleClose = () => setShow(false);
 
     const editShopItem = async () => {
         const config = {
@@ -109,6 +114,10 @@ function ShopItem() {
         })
         setLoading(false);
     };
+
+    const deleteItem = async () => {
+        console.log(`Deleting item ${itemName}`)
+    };
     useEffect(() => {
         getItem();
     }, [loading]);
@@ -119,6 +128,25 @@ function ShopItem() {
             {prompt ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
             {errors.length > 0 ? (errors.map(e => <Alert variant='danger'>{e}</Alert>)) : <></>}
 
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Deleteing an Item</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this item.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="danger" onClick={deleteItem}>Delete</Button>
+                </Modal.Footer>
+            </Modal>
             {!loading && (
                 <Form onSubmit={(e) => onSubmit(e)}>
                     <Form.Group controlId="itemName">
@@ -179,6 +207,18 @@ function ShopItem() {
                             />
                         )}
                         {!editMode ? "EDIT" : "Cancel"}
+                    </Button>
+                    <Button variant="danger" className="my-2 mx-2" onClick={() => setShow(true)} >
+                        {loading && (
+                            <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                            />
+                        )}
+                        DELETE
                     </Button>
                 </Form>
 
