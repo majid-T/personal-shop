@@ -104,8 +104,8 @@ function ItemsTable({ items, refreshItems }) {
                         <th>#</th>
                         <th>Item Name</th>
                         <th>Description</th>
-                        <th>Quantity</th>
                         <th>Price</th>
+                        <th>Quantity</th>
                         <th colSpan='2'>Actions</th>
                     </tr>
                 </thead>
