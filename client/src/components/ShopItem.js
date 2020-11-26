@@ -116,7 +116,34 @@ function ShopItem() {
     };
 
     const deleteItem = async () => {
-        console.log(`Deleting item ${itemName}`)
+        const config = {
+            headers: {
+                "Access-Control-Allow-Origin": "http://localhost:3000/",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                "Access-Control-Allow-Credentials": "true",
+                "Access-Control-Allow-Headers": "accept, accept-encoding, authorization, content-type, dnt, origin, user-agent, x-csrftoken, x-requested-with",
+                "Access-Control-Allow-Headers": "access-control-allow-credentials, access-control-allow-headers, access-control-allow-methods, access-control-allow-origin, access-control-max-age",
+                "Access-Control-Max-Age": "86400"
+            },
+        };
+
+        console.log(`Deleting ${itemName}`)
+
+        try {
+            const res = await axios.delete(
+                `http://localhost:8000/api/shopItems/${id}/`,
+                config
+            );
+
+            console.log(res)
+            if (res.status == 204) {
+                console.log("Deleted successfuly")
+            }
+        } catch (err) {
+            console.log("CATCH", err);
+        }
+
+        setShow(false);
     };
     useEffect(() => {
         getItem();
