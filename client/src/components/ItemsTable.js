@@ -68,7 +68,7 @@ function ItemsTable({ items, refreshItems }) {
             <td className='deleteItem centerd-text' onClick={() => promptDelete(item)}>x</td>
             <td className='centerd-text'>
                 <Link to={`/shop-item/${item.id}`}>
-                    <i class="fas fa-edit"></i>
+                    <i className="fas fa-edit"></i>
                 </Link>
             </td>
         </tr >)

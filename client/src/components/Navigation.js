@@ -6,7 +6,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">Shop Icon</Navbar.Brand>
+      <Navbar.Brand href="/"><i className="fas fa-gifts fa-2x"></i></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
