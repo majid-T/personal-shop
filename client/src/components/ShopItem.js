@@ -9,7 +9,7 @@ import Spinner from "react-bootstrap/Spinner";
 import Modal from 'react-bootstrap/Modal';
 
 
-function ShopItem() {
+function ShopItem(props) {
     let { id } = useParams();
     const url = "http://localhost:8000/api/shopItems/";
     const [errors, setErrors] = useState([]);
@@ -138,6 +138,7 @@ function ShopItem() {
             console.log(res)
             if (res.status == 204) {
                 console.log("Deleted successfuly")
+                props.history.push("/");
             }
         } catch (err) {
             console.log("CATCH", err);
