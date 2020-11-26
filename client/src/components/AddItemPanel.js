@@ -106,9 +106,9 @@ function AddItemPanel({ refreshItems }) {
       {prompt ? <Alert variant={promptClass}>{propmtMsg}</Alert> : <></>}
       {errors.length > 0 ? (errors.map(e => <Alert variant='danger'>{e}</Alert>)) : <></>}
 
+      <h3>Add new Item</h3>
       <Form onSubmit={(e) => onSubmit(e)}>
         <Form.Group controlId="itemName">
-          <Form.Label>Item name</Form.Label>
           <Form.Control type="text" placeholder="Enter Item name"
             name="itemName"
             value={itemName}
@@ -116,7 +116,6 @@ function AddItemPanel({ refreshItems }) {
         </Form.Group>
 
         <Form.Group controlId="itemDesc">
-          <Form.Label>Description to your Item</Form.Label>
           <Form.Control type="text" placeholder="What is it?" name="itemDesc"
             value={itemDesc}
             onChange={(e) => onChange(e)} />
