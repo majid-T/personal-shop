@@ -142,6 +142,10 @@ function ShopItem(props) {
             }
         } catch (err) {
             console.log("CATCH", err);
+            setPrompt(true);
+            setPropmtMsg(`there was a problem ${err}`);
+            setPromptClass('danger');
+            setTimeout(() => setPrompt(false), 5000);
         }
 
         setShow(false);

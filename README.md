@@ -10,7 +10,6 @@
   </div>
 
 ## Todo 
-- Add delete in item page
 - Add page not Found component
 - Add trycatch to all axios calls
 - Table of Items is not responsive and scrollable
