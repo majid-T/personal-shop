@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import ShopItem from './components/ShopItem'
 import Landing from './components/Landing'
-// import NotFound from "../layout/NotFound";
+import NotFound from "./components/NotFound";
 
 const Routes = () => {
   return (
@@ -10,7 +10,7 @@ const Routes = () => {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/shop-item/:id" component={ShopItem} />
-        {/* <Route component={NotFound} />  */}
+        <Route component={NotFound} />
       </Switch>
     </section>
   );
