@@ -76,7 +76,7 @@ function AddItemPanel({ refreshItems }) {
     } catch (err) {
       console.log("CATCH", err);
       const responseErrors = []
-      if (err.response.data) {
+      if (err.response && err.response.data) {
         for (const [key, value] of Object.entries(err.response.data)) {
           responseErrors.push(`${key}: ${value}`)
         }
