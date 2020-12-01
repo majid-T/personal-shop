@@ -6,8 +6,8 @@ import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
 import AddItemPanel from "./AddItemPanel";
 import ItemsTable from './ItemsTable';
-// refreshItems = {() => getItems()}
-function Landing() {
+
+function Management() {
   const url = "http://localhost:8000/api/shopItems/";
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,4 +33,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default Management;
