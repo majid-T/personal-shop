@@ -10,7 +10,6 @@ function App() {
     <Router>
       <Navigation />
       <Switch>
-        {/* <Route exact path="/" component={Landing} /> */}
         <Route component={Routes} />
       </Switch>
     </Router>
