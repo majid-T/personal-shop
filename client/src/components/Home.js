@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Spinner from "./Spinner";
+import ItemCard from './ItemCard'
 
 const Home = () => {
     const url = "http://localhost:8000/api/shopItems/";
@@ -27,7 +28,7 @@ const Home = () => {
                 <Col sm={3}>
                     <div>Left Panel</div>
                 </Col>
-                <Col sm={9}>{loading ? <Spinner /> : <div>{items.map((i) => <h4>{i.name}</h4>)}</div>}</Col>
+                <Col sm={9}>{loading ? <Spinner /> : items.map((item) => <ItemCard item={item} />)}</Col>
             </Row>
         </Container>
     )
