@@ -10,7 +10,7 @@
   </div>
 
 ## Todo 
-- Add page not Found component
+- Add CardLayout to home
 - Add trycatch to all axios calls
 - Table of Items is not responsive and scrollable
 
